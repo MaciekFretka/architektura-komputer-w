@@ -1,4 +1,4 @@
 # 241132
-# AK2 Laboratorium 1
-## Algorytm ROT13
 Jaroński Maciej Mateusz
+##  Laboratorium 2
+Mnożenie liczb hexadecymalnych
