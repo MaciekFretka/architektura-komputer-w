@@ -22,8 +22,8 @@ typedef unsigned char byte;
 //width: An int pointer to store the width of the image in pixels
 //height: An int pointer to store the height of the image in pixels
 //bytesPerPixel: An int pointer to store the number of bytes per pixel that are used in the image
-void steganography(byte* pixels, int size);
-void read(byte* pixels,int size); 
+void filter(byte* pixels, int width,int height,int size);
+
 void ReadImage(const char *fileName,byte **pixels, int32 *width, int32 *height, int32 *bytesPerPixel)
 {
         //Open the file for reading in binary mode
@@ -148,31 +148,16 @@ int main()
         int32 height;
         int32 bytesPerPixel;
         
-        int tep=1;
 
-        printf("Wybierz tryb działania programu \n");
-        printf("1 - Odczyt wiadomości\n");
-        printf("2 - Ukrycie wiadomości\n");
-        scanf("%d",&tep);
 
-        if(tep==1){
-        ReadImage("img2.bmp", &pixels, &width, &height,&bytesPerPixel);
-         int size = width*height*3;
-         int buffor;
-         printf("Wprowadz liczbe znakow do wyswietlenia:\n");
-         scanf("%d",&buffor);
-         if(size<buffor){
-                 printf("Wprowadzony rozmiar przekracza liczbe pikseli w obrazie\n");
-                 return 0;
-         }
-        read(pixels,buffor);
-        }else if (tep==2){
+      
         ReadImage("img.bmp", &pixels, &width, &height,&bytesPerPixel);
          
         int size = width*height*3;
-        steganography(pixels, size);
+
+        filter(pixels, (3*width-1),(3*height-1),size);
         WriteImage("img2.bmp", pixels, width, height, bytesPerPixel);
-        } 
+        
 
        
         free(pixels);
